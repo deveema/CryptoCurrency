@@ -1,5 +1,45 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿<link rel="stylesheet" type="text/css" href="~/css/main.css">
 
-Index
+
+<table>
+    <tr>
+        <th>#</th>
+        <th>Coin</th>
+        <th>Price</th>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>BTC</td>
+        <td>50</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>BCH</td>
+        <td>94</td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>LTC</td>
+        <td>94</td>
+    </tr>
+    <tr>
+        <td>4</td>
+        <td>ETH</td>
+        <td>94</td>
+    </tr>
+</table>
+
+<script src="js/signalr.min.js"></script>
+<script>
+    let hubUrl = 'https://min-api.cryptocompare.com/data/subsWatchlist?fsyms=BTC,MLN,DASH&tsym=USD';
+        const hubConnection = new signalR.HubConnectionBuilder()
+            .withUrl(hubUrl)
+            .configureLogging(signalR.LogLevel.Information)
+            .build();
+
+        hubConnection.on("Get", function (data) {
+            alert(data);
+        });
+
+        hubConnection.start();
+</script>
